@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 var path = require('path');
 var assert = require('yeoman-generator').assert;
@@ -18,3 +18,4 @@ describe('MayAng:generators/module', function () {
     ]);
   });
 });
+*/

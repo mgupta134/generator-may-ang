@@ -22,7 +22,7 @@ module.exports = yeoman.generators.Base.extend({
 
         //Greet user
         this.log(yosay(
-            'Welcome to the top-notch ' + chalk.red('may-ang') + ' generator!'
+            'Yo Yo Yo! Let\'s get started with ' + chalk.red('may-ang') + ' generator!'
         ));
 
     },
@@ -50,9 +50,10 @@ module.exports = yeoman.generators.Base.extend({
         }];
 
         this.prompt(prompts, function(props) {
-            //slugish app name
+            //slugish app name => if user enters "Hello World" it will be "hello-world"
             props.slugishAppName = _.slugify(props.appName)
-            props.camelizeAppName = _.camelize(_.decapitalize(props.AppName));
+            //camelize app name => result for "Hello World" will be "helloWorld"
+            props.camelizeAppName = _.camelize(_.decapitalize(props.appName));
             // To access props later use this.props.someOption;
             this.props = props;
             done();
@@ -60,6 +61,12 @@ module.exports = yeoman.generators.Base.extend({
         }.bind(this));
     },
 
+    /*  Prompt user to include most common angular modules
+    *   1) Angular Cookies
+    *   2) Angular Animate
+    *   3) Angular Touch 
+    *   4) Angulat Sanitize
+    */
     promptModulesDependecies: function() {
         var done = this.async();
 
@@ -96,26 +103,40 @@ module.exports = yeoman.generators.Base.extend({
 
     //Generate Folders
     scaffoldFolders: function() {
-        mkdirp('build');
-        //test is not included yet
-        //mkdirp('tests');
-        mkdirp('app');
+        //Application root folder
+        var rootFolder = this.props.camelizeAppName;
+        mkdirp(rootFolder);
+        //Folder where all the build files will be kept
+        mkdirp(rootFolder + '/build');
+        //Test folder
+        mkdirp(rootFolder + '/tests');
+        //Application folder
+        mkdirp(rootFolder + '/app');
         //Images and other assets go here
-        mkdirp('app/assets');
+        mkdirp(rootFolder + '/app/assets');
         //All script file goes here 
-        mkdirp('app/scripts');
-        mkdirp('app/scripts/vendors');
-        mkdirp('app/scripts/modules');
-        mkdirp('app/scripts/directives');
+        mkdirp(rootFolder + '/app/scripts');
+        //Libraries included with bower
+        mkdirp(rootFolder + '/app/scripts/vendors');
+        //Application modules
+        mkdirp(rootFolder + '/app/scripts/modules');
+        //Custom Directives
+        mkdirp(rootFolder + '/app/scripts/directives');
+        //Custom filters
+        mkdirp(rootFolder + '/app/scripts/filters');
 
         //All less files goes here
-        mkdirp('app/styles');
-        mkdirp('app/styles/less');
+        mkdirp(rootFolder + '/app/styles');
+        mkdirp(rootFolder + '/app/styles/less');
 
     },
 
-    copyFiles: function() {
-        var props = this.props;
+    copyRootFiles: function() {
+
+    },
+
+    copyAppFiles: function(){
+       /* var props = this.props;
 
         this.fs.copyTpl(
             this.templatePath('app/_index.html'),
@@ -145,12 +166,12 @@ module.exports = yeoman.generators.Base.extend({
                 ngTouch: _.contains(props.angularModules, 'angularTouch'),
                 ngSanitize: _.contains(props.angularModules, 'angularSanitize')
             }
-        );
+        );*/
 
     },
 
     createBaseModule: function() {
-        this.composeWith('may-ang:module', { args: ['entry'] });
+        // this.composeWith('may-ang:module', { args: ['entry'] });
     }
 
 

@@ -1,0 +1,14 @@
+{
+  "name": "<%= slugishAppName %>",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "~1.5.0",
+    "angular-mocks": "~1.5.0",
+    <%if(ngCookies){%>"angular-cookies": "~1.5.0",<%}%>
+    <%if(ngAnimate){%>"angular-animate": "~1.5.0",<%}%>
+    <%if(ngTouch){%>"angular-touch": "~1.5.0",<%}%>
+    <%if(ngSanitize){%>"angular-sanitize": "~1.5.0",<%}%>
+    "angular-ui-router": "~0.2.15"
+  }
+}
+
