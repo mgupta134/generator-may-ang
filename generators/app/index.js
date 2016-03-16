@@ -54,6 +54,7 @@ module.exports = yeoman.generators.Base.extend({
             props.slugishAppName = _.slugify(props.appName)
             //camelize app name => result for "Hello World" will be "helloWorld"
             props.camelizeAppName = _.camelize(_.decapitalize(props.appName));
+            this.rootAppFolder = props.camelizeAppName;
             // To access props later use this.props.someOption;
             this.props = props;
             done();
@@ -104,7 +105,7 @@ module.exports = yeoman.generators.Base.extend({
     //Generate Folders
     scaffoldFolders: function() {
         //Application root folder
-        var rootFolder = this.props.camelizeAppName;
+        var rootFolder = this.rootAppFolder;
         mkdirp(rootFolder);
         //Folder where all the build files will be kept
         mkdirp(rootFolder + '/build');
@@ -132,7 +133,40 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     copyRootFiles: function() {
-
+        //Package file
+        this.fs.copy(
+            this.templatePath('root/_package.json'),
+            this.destinationPath(this.rootAppFolder + '/package.json')
+        );
+        //Bower and bowerrrc
+        this.fs.copy(
+            this.templatePath('root/_bower.json'),
+            this.destinationPath(this.rootAppFolder + '/bower.json')
+        );
+        this.fs.copy(
+            this.templatePath('root/_bowerrc'),
+            this.destinationPath(this.rootAppFolder + '/.bowerrc')
+        );
+        //Grunt file
+        this.fs.copy(
+            this.templatePath('root/_Gruntfile.js'),
+            this.destinationPath(this.rootAppFolder + '/Gruntfile.js')
+        );
+        //jshintrc
+        this.fs.copy(
+            this.templatePath('root/_jshintrc'),
+            this.destinationPath(this.rootAppFolder + '/.jshintrc')
+        );
+        //csslintrc
+        this.fs.copy(
+            this.templatePath('root/_csslintrc'),
+            this.destinationPath(this.rootAppFolder + '/.csslintrc')
+        );
+        //gitignore
+        this.fs.copy(
+            this.templatePath('root/_gitignore'),
+            this.destinationPath(this.rootAppFolder + '/.gitignore')
+        );
     },
 
     copyAppFiles: function(){
