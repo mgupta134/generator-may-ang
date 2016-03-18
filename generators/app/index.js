@@ -129,6 +129,7 @@ module.exports = yeoman.generators.Base.extend({
         //All less files goes here
         mkdirp(rootFolder + '/app/styles');
         mkdirp(rootFolder + '/app/styles/less');
+        mkdirp(rootFolder + '/app/styles/css');
 
     },
 
