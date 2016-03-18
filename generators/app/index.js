@@ -41,7 +41,7 @@ module.exports = yeoman.generators.Base.extend({
             message: 'What you want to call your app?',
             default: 'angular-project'
         }, {
-            name: 'appAuthor',
+            name: 'author',
             message: 'What is the name of the author?'
         }, {
             name: 'defaultModule',
@@ -144,6 +144,7 @@ module.exports = yeoman.generators.Base.extend({
             this.templatePath('root/_bower.json'),
             this.destinationPath(this.rootAppFolder + '/bower.json'), {
                 slugishAppName: props.slugishAppName,
+                author: props.author,
                 ngCookies: _.contains(props.angularModules, 'angularCookies'),
                 ngAnimate: _.contains(props.angularModules, 'angularAnimate'),
                 ngTouch: _.contains(props.angularModules, 'angularTouch'),
